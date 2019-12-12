@@ -1,13 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:substring_highlight/substring_highlight.dart';
 
+// https://flutter.dev/docs/cookbook/testing/widget/introduction#3-create-a-testwidgets-test
+
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-    expect(() => calculator.addOne(null), throwsNoSuchMethodError);
+  // Define a test. The TestWidgets function also provides a WidgetTester
+  // to work with. The WidgetTester allows you to build and interact
+  // with widgets in the test environment.
+  testWidgets('test the thing!', (WidgetTester tester) async {
+    await tester.pumpWidget(Directionality(child: SubstringHighlight(text: 'Peter', term: 't'), textDirection: TextDirection.ltr));
   });
 }
