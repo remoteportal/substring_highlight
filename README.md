@@ -44,13 +44,13 @@ import 'package:substring_highlight/substring_highlight.dart';
       child: SubstringHighlight(
         text: dropDownItem,                         // each string needing highlighting
         term: searchTerm,                           // user typed "m4a"        
-        **textStyle: TextStyle(                       // non-highlight style                       
+        textStyle: TextStyle(                       // non-highlight style                       
           color: Colors.grey,
         ),
         textStyleHighlight: TextStyle(              // highlight style
           color: Colors.black,
           decoration: TextDecoration.underline,
-        ),**        
+        ),        
       ),
     );
   }
