@@ -28,7 +28,7 @@ Add a new dependency line to your project/pubspec.yaml file:
 
 ```yaml
 dependencies:
-  substring_highlight: 0.0.1      # use latest version
+  substring_highlight: 0.1.0      # use latest version
 ```
 
 # Examples

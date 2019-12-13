@@ -1,3 +1,10 @@
-## [0.0.1] - 12/12/19.
+# Changelog
 
-basic text highlighting functionality.
+## Version 0.1.0 (2019-12-15)
+
+- Added full example
+
+
+## Version 0.0.1 (2019-12-15)
+
+- basic text highlighting functionality
