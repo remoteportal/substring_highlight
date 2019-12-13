@@ -15,7 +15,7 @@ The substrings being searched for highlighting _don't_ have to match at the *beg
 
 Even space characters will match, but not be highlighted, obviously.
 
-Ancestor MUST have [textDirection] set (required by internal [RichText] widget), either through [MaterialApp widget] or explicitly wrapped by a [Directionality] widget:
+Ancestor MUST have textDirection set (required by internal RichText widget), either through MaterialApp widget or explicitly wrapped by a Directionality widget:
 ```
 Directionality(
     child: SubstringHighlight(text: 'Peter', term: 't'),
@@ -41,7 +41,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 ...
 
   @override
-  Widget build(BuildContext context) [
+  Widget build(BuildContext context) (
     return Container(
       padding: const EdgeInsets.all(12),
       child: SubstringHighlight(
@@ -49,7 +49,7 @@ import 'package:substring_highlight/substring_highlight.dart';
         term: searchTerm,       // user typed "et"
       ),
     );
-  ]
+  )
 ```
 ### Output:
 ![Screenshot](example.png)
@@ -65,7 +65,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 ...
 
   @override
-  Widget build(BuildContext context) [
+  Widget build(BuildContext context) (
     return Container(
       padding: const EdgeInsets.all(12),
       child: SubstringHighlight(
@@ -80,7 +80,7 @@ import 'package:substring_highlight/substring_highlight.dart';
         ),        
       ),
     );
-  ]
+  )
 ```
 ### Output:
 ![Screenshot](example2.png)
