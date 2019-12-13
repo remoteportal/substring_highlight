@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 12/12/19.
 
-* TODO: Describe initial release.
+basic text highlighting functionality.

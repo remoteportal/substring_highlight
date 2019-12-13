@@ -7,7 +7,7 @@ The substrings being searched for highlighting don't have to match at the beginn
 
 ## Default Styling Example
 ### Code:
-As an example, the following code snippet uses this package to highlight matching characters in each search results:  
+As an example, the following code snippet uses this package to highlight matching characters in each search result:  
 ```
 import 'package:substring_highlight/substring_highlight.dart';
 
@@ -31,7 +31,7 @@ import 'package:substring_highlight/substring_highlight.dart';
 
 ## Customized Styling Example
 ### Code:
-As an example, the following code snippet uses this package to highlight matching characters in each search results:  
+This example adds 'textStyle' and 'textStyleHighlight' to change the colors of the text:  
 ```
 import 'package:substring_highlight/substring_highlight.dart';
 
@@ -44,13 +44,13 @@ import 'package:substring_highlight/substring_highlight.dart';
       child: SubstringHighlight(
         text: dropDownItem,                         // each string needing highlighting
         term: searchTerm,                           // user typed "m4a"        
-        textStyle: TextStyle(                       // non-highlight style                       
+        **textStyle: TextStyle(                       // non-highlight style                       
           color: Colors.grey,
         ),
         textStyleHighlight: TextStyle(              // highlight style
           color: Colors.black,
           decoration: TextDecoration.underline,
-        ),        
+        ),**        
       ),
     );
   }
