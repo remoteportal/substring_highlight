@@ -2,10 +2,18 @@ library substring_highlight;
 
 import 'package:flutter/material.dart';
 
+/// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
+  /// The String searched by {SubstringHighlight.term}.
   final String text;
+
+  /// The sub-string that is highlighted inside {SubstringHighlight.text}.
   final String term;
+
+  /// The {TextStyle} of the {SubstringHighlight.text} that isn't highlighted.
   final TextStyle textStyle;
+
+  /// The {TextStyle} of the {SubstringHighlight.term}s found.
   final TextStyle textStyleHighlight;
 
   SubstringHighlight({

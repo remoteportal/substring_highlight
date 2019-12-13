@@ -2,7 +2,13 @@
 
 Highlight Flutter text at the character-level.  Designed for case-insensitive search-term highlighting, a single search term sub-string is highlighted (perhaps multiple times) within a longer string.    Inspired by the existing Flutter package "highlight_text," but supports sub-word character matches (e.g., 't' in 'Peter').  Limits: Only supports a single search term and does not support clickable highlighted sub-strings.
 
-The substrings being searched for highlighting don't have to match at the beginning of the longer strings (can be anywhere inside, case-insensitive).
+The substrings being searched for highlighting _don't_ have to match at the *beginning* of the longer strings (can be anywhere inside, case-insensitive).
+
+Even space characters will match, but not be highlighted, per se.
+
+Ancestor MUST have {textDirection} set, either through {MaterialApp widget} or explicitly wrapped by a {Directionality} widget:
+
+```Directionality(child: SubstringHighlight(text: 'Peter', term: 't'), textDirection: TextDirection.ltr)```
 
 
 ## Default Styling Example
