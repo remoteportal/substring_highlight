@@ -23,13 +23,21 @@ Directionality(
 ```
 
 
+# Pull Requests
+Pull requests are welcome!
+
+
 # Usage
 Add a new dependency line to your project/pubspec.yaml file:
 
 ```yaml
 dependencies:
+  ...
   substring_highlight: 0.1.0      # use latest version
 ```
+
+Don't forget to *flutter pub get*.
+
 
 # Examples
 ## Default Styling Example

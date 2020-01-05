@@ -1,6 +1,7 @@
 library substring_highlight;
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {

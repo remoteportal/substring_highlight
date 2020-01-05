@@ -1,6 +1,6 @@
 name: substring_highlight
 description: Highlight Flutter text at the character-level for customizable and simple search term highlighting.
-version: 0.1.0
+version: 0.1.1
 author: Peter Alvin <github_public@onlyup.com>
 homepage: https://github.com/remoteportal/substring_highlight
 
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  meta: 1.1.8
 
 dev_dependencies:
   flutter_test:
