@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:substring_highlight/substring_highlight.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
