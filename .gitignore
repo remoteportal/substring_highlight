@@ -1,6 +1,6 @@
 # https://www.dartlang.org/guides/libraries/private-files
 # https://thoughtbot.com/blog/xcode-and-git-bridging-the-gap
-
+# https://stackoverflow.com/questions/2415873/exceptions-in-gitignore
 
 
 # Keep this private
@@ -53,7 +53,11 @@ doc/api/
 *.iml
 *.ipr
 *.iws
-.idea/
+#PREV: .idea/
+.idea/*
+#EXCEPTION
+#DNW: !.idea/dictionaries/pete.xml
+!.idea/dictionaries/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -77,6 +81,7 @@ doc/api/
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
+
 
 # iOS/XCode related
 **/ios/**/*.mode1v3

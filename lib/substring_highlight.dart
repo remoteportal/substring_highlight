@@ -38,7 +38,7 @@ class SubstringHighlight extends StatelessWidget {
       List<InlineSpan> children = [];
       List<String> spanList = text.toLowerCase().split(termLC);
       int i = 0;
-      spanList.forEach((v) {
+      for (var v in spanList) {
         if (v.isNotEmpty) {
           children.add(TextSpan(
               text: text.substring(i, i + v.length), style: textStyle));
@@ -50,7 +50,7 @@ class SubstringHighlight extends StatelessWidget {
               style: textStyleHighlight));
           i += term.length;
         }
-      });
+      }
       return RichText(text: TextSpan(children: children));
     }
   }
