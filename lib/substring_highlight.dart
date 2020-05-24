@@ -20,6 +20,9 @@ class SubstringHighlight extends StatelessWidget {
   /// The {TextOverflow} of the text
   final TextOverflow overflow;
 
+  /// The maxLines of the text
+  final int maxLines;
+
   SubstringHighlight({
     @required this.text,
     @required this.term,
@@ -30,6 +33,7 @@ class SubstringHighlight extends StatelessWidget {
       color: Colors.red,
     ),
     this.overflow = TextOverflow.clip,
+    this.maxLines,
   });
 
   @override
@@ -55,7 +59,10 @@ class SubstringHighlight extends StatelessWidget {
           i += term.length;
         }
       }
-      return RichText(text: TextSpan(children: children), overflow: overflow);
+      return RichText(
+          text: TextSpan(children: children),
+          overflow: overflow,
+          maxLines: maxLines);
     }
   }
 }
