@@ -39,7 +39,12 @@ class SubstringHighlight extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (term.isEmpty) {
-      return Text(text, style: textStyle, overflow: overflow);
+      return Text(
+        text,
+        style: textStyle,
+        overflow: overflow,
+        maxLines: maxLines,
+      );
     } else {
       String termLC = term.toLowerCase();
 
@@ -60,9 +65,10 @@ class SubstringHighlight extends StatelessWidget {
         }
       }
       return RichText(
-          text: TextSpan(children: children),
-          overflow: overflow,
-          maxLines: maxLines);
+        text: TextSpan(children: children),
+        overflow: overflow,
+        maxLines: maxLines,
+      );
     }
   }
 }
