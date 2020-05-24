@@ -17,6 +17,9 @@ class SubstringHighlight extends StatelessWidget {
   /// The {TextStyle} of the {SubstringHighlight.term}s found.
   final TextStyle textStyleHighlight;
 
+  /// The {TextOverflow} of the text
+  final TextOverflow overflow;
+
   SubstringHighlight({
     @required this.text,
     @required this.term,
@@ -26,12 +29,13 @@ class SubstringHighlight extends StatelessWidget {
     this.textStyleHighlight = const TextStyle(
       color: Colors.red,
     ),
+    this.overflow = TextOverflow.clip,
   });
 
   @override
   Widget build(BuildContext context) {
     if (term.isEmpty) {
-      return Text(text, style: textStyle);
+      return Text(text, style: textStyle, overflow: overflow);
     } else {
       String termLC = term.toLowerCase();
 
@@ -51,7 +55,7 @@ class SubstringHighlight extends StatelessWidget {
           i += term.length;
         }
       }
-      return RichText(text: TextSpan(children: children));
+      return RichText(text: TextSpan(children: children), overflow: overflow);
     }
   }
 }
