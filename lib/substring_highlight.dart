@@ -41,17 +41,26 @@ class SubstringHighlight extends StatelessWidget {
       for (var v in spanList) {
         if (v.isNotEmpty) {
           children.add(TextSpan(
-              text: text.substring(i, i + v.length), style: textStyle));
+            text: text.substring(i, i + v.length),
+            style: textStyle,
+          ));
           i += v.length;
         }
         if (i < text.length) {
           children.add(TextSpan(
-              text: text.substring(i, i + term.length),
-              style: textStyleHighlight));
+            text: text.substring(i, i + term.length),
+            style: textStyleHighlight,
+          ));
           i += term.length;
         }
       }
-      return RichText(text: TextSpan(children: children));
+      return RichText(
+        textScaleFactor: MediaQuery.of(context).textScaleFactor,
+        text: TextSpan(
+          children: children,
+          style: textStyle,
+        ),
+      );
     }
   }
 }
