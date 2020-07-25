@@ -1,9 +1,12 @@
 # Changelog
 
+## Version 
+
+- Sets the textScaleFactor propert on the RichText value inside
+
 ## Version 0.1.3 (2020-02-18)
 
 - Effective Dart
-
 
 
 ## Version 0.1.2 (2020-01-05)
