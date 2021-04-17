@@ -11,7 +11,7 @@ void main() {
   // with widgets in the test environment.
   testWidgets('test the thing!', (WidgetTester tester) async {
     await tester.pumpWidget(Directionality(
-        child: SubstringHighlight(text: 'Peter', term: 't'),
+        child: SubstringHighlight(text: 'Peter', terms: ['t']),
         textDirection: TextDirection.ltr));
   });
 }
