@@ -11,9 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: Scaffold(
-          body: Center(
-              child: SubstringHighlight(
-                  text: 'search me for search terms', term: 'search'))),
+        body: Center(
+          child: SubstringHighlight(
+            text: 'search me for search terms for all me',
+            terms: ["x"],
+          ),
+        ),
+      ),
     );
   }
 }

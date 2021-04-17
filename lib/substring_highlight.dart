@@ -1,5 +1,8 @@
 library substring_highlight;
 
+import 'dart:math';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -9,7 +12,7 @@ class SubstringHighlight extends StatelessWidget {
   final String text;
 
   /// The sub-string that is highlighted inside {SubstringHighlight.text}.
-  final String term;
+  final List<String> terms;
 
   /// The {TextStyle} of the {SubstringHighlight.text} that isn't highlighted.
   final TextStyle textStyle;
@@ -19,39 +22,70 @@ class SubstringHighlight extends StatelessWidget {
 
   SubstringHighlight({
     @required this.text,
-    @required this.term,
+    @required this.terms,
     this.textStyle = const TextStyle(
       color: Colors.black,
     ),
     this.textStyleHighlight = const TextStyle(
       color: Colors.red,
     ),
-  });
+  }) : assert(terms.isNotEmpty); // ensure terms list is not empty
 
   @override
   Widget build(BuildContext context) {
-    if (term.isEmpty) {
-      return Text(text, style: textStyle);
-    } else {
-      String termLC = term.toLowerCase();
-
-      List<InlineSpan> children = [];
-      List<String> spanList = text.toLowerCase().split(termLC);
-      int i = 0;
-      for (var v in spanList) {
-        if (v.isNotEmpty) {
-          children.add(TextSpan(
-              text: text.substring(i, i + v.length), style: textStyle));
-          i += v.length;
+    // create a map of the postions of the
+    // text to be highlighted.
+    final indexes = Map<int, List<int>>();
+    for (int i = 0; i < terms.length; i++) {
+      int idx = text.indexOf(terms[i]);
+      while (idx >= 0) {
+        if (indexes[i] != null) {
+          indexes[i].add(idx);
+        } else {
+          indexes[i] = [idx];
         }
-        if (i < text.length) {
-          children.add(TextSpan(
-              text: text.substring(i, i + term.length),
-              style: textStyleHighlight));
-          i += term.length;
-        }
+        idx = text.indexOf(terms[i], idx + 1);
       }
-      return RichText(text: TextSpan(children: children));
     }
+    // error check for empty map
+    if (indexes.isEmpty)
+      return Text(
+        text,
+        style: textStyle,
+      );
+    // create sorted list of highlight text positions
+    List<int> listOfValues = [];
+    indexes.values.forEach((tuple) {
+      listOfValues += tuple.toList();
+    });
+    listOfValues.sort();
+    // loop through input string assign text style to highlight text
+    // and "regular" text
+    List<InlineSpan> children = [];
+    for (int i = 0; i < text.length; i++) {
+      if (listOfValues.contains(i)) {
+        final key = indexes.keys.firstWhere((key) => indexes[key].contains(i));
+        children.add(
+          TextSpan(
+            text: text.substring(i, i + terms[key].length),
+            style: textStyleHighlight,
+          ),
+        );
+        // remove index of term after it is
+        // added to children list
+        listOfValues.remove(i);
+        i += terms[key].length - 1;
+      } else {
+        final subString = text.substring(i, listOfValues.reduce(min));
+        children.add(
+          TextSpan(
+            text: subString,
+            style: textStyle,
+          ),
+        );
+        i += subString.length - 1;
+      }
+    }
+    return RichText(text: TextSpan(children: children));
   }
 }
