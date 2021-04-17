@@ -33,10 +33,18 @@ class SubstringHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultText = Text(
+      text,
+      style: textStyle,
+    );
     // create a map of the postions of the
     // text to be highlighted.
     final indexes = Map<int, List<int>>();
     for (int i = 0; i < terms.length; i++) {
+      // skips iteration when term is an empty string
+      if (terms[i].isEmpty) {
+        continue;
+      }
       int idx = text.indexOf(terms[i]);
       while (idx >= 0) {
         if (indexes[i] != null) {
@@ -48,11 +56,7 @@ class SubstringHighlight extends StatelessWidget {
       }
     }
     // error check for empty map
-    if (indexes.isEmpty)
-      return Text(
-        text,
-        style: textStyle,
-      );
+    if (indexes.isEmpty) return defaultText;
     // create sorted list of highlight text positions
     List<int> listOfValues = [];
     indexes.values.forEach((tuple) {
@@ -76,7 +80,8 @@ class SubstringHighlight extends StatelessWidget {
         listOfValues.remove(i);
         i += terms[key].length - 1;
       } else {
-        final subString = text.substring(i, listOfValues.reduce(min));
+        final subString = text.substring(
+            i, (listOfValues.isEmpty) ? null : listOfValues.reduce(min));
         children.add(
           TextSpan(
             text: subString,

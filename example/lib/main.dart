@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         body: Center(
           child: SubstringHighlight(
             text: 'search me for search terms for all me',
-            terms: ["x"],
+            terms: ["me", "f", "h"],
           ),
         ),
       ),
