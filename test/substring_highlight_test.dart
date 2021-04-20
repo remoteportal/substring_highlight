@@ -8,7 +8,7 @@ void main() {
       MediaQuery(
         data: MediaQueryData(size: Size(200, 300)),
         child: Directionality(
-          child: SubstringHighlight(text: 'Peter', term: 't'),
+          child: SubstringHighlight(text: 'Peter', terms: ['t']),
           textDirection: TextDirection.ltr,
         ),
       ),
@@ -28,7 +28,7 @@ void main() {
             Directionality(
               child: SubstringHighlight(
                 text: 'Peter',
-                term: 't',
+                terms: ['t'],
                 textStyle: ts,
               ),
               textDirection: TextDirection.ltr,
@@ -36,7 +36,7 @@ void main() {
             Directionality(
               child: SubstringHighlight(
                 text: 'Peter',
-                term: '',
+                terms: [''],
                 textStyle: ts,
               ),
               textDirection: TextDirection.ltr,

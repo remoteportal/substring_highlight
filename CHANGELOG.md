@@ -1,6 +1,15 @@
 # Changelog
 
 
+
+## Version 1.0.26 (2021-04-20)
+
+- Support for multiple search terms with terms property [issues #2 and #6 and #7]
+- Support for overflow and maxLines properties [issue #5]
+- satisfied all pull requests
+
+
+
 ## Version 1.0.25 (2021-04-20)
 
 - Support for overflow and maxLines properties [issue #5]

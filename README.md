@@ -7,9 +7,9 @@ Designed for case-insensitive search-term highlighting, a single search term sub
 Inspired by the existing Flutter package "highlight_text" which supports word matches ('Peter''), but substring_highlight has more granular character-by-character matches (e.g., 't' in 'Peter').
 
 Limitations:
-1. Only supports a single search term
-2. Only case-insensitive matches
-3. Highlighted text is not clickable
+1. Highlighted text is not clickable
+2. Needs a flag to promote granularity to word-level instead of character-level.
+3. Doesn't solve perplexing world problems
 
 The substrings being searched for highlighting _don't_ have to match at the *beginning* of the longer strings (can be anywhere inside).
 
@@ -33,7 +33,7 @@ Add a new dependency line to your project/pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  substring_highlight: ^1.0.25      # use latest version
+  substring_highlight: ^1.0.26      # use latest version
 ```
 
 Don't forget to *flutter pub get*.
