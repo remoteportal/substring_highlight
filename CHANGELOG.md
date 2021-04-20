@@ -1,5 +1,13 @@
 # Changelog
 
+
+## Version 1.0.24 (2021-04-20)
+
+- upgraded to Dart 2.0
+- migrated to null-safety
+
+
+
 ## Version 0.1.3 (2020-02-18)
 
 - Effective Dart

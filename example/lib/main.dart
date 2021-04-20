@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
           body: Center(
               child: SubstringHighlight(
-                  text: 'search me for search terms', term: 'search'))),
+                  text: 'this highlights all the th\'s', term: 'th'))),
     );
   }
 }

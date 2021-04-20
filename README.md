@@ -4,7 +4,7 @@ Highlight Flutter text at the character-level.
 
 Designed for case-insensitive search-term highlighting, a single search term sub-string is highlighted (perhaps multiple times) within a longer string.
 
-Inspired by the existing Flutter package "highlight_text," but supports sub-word character matches (e.g., 't' in 'Peter').
+Inspired by the existing Flutter package "highlight_text" which supports word matches ('Peter''), but substring_highlight has more granular character-by-character matches (e.g., 't' in 'Peter').
 
 Limitations:
 1. Only supports a single search term
@@ -33,7 +33,7 @@ Add a new dependency line to your project/pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  substring_highlight: ^0.1.3      # use latest version
+  substring_highlight: ^1.0.24      # use latest version
 ```
 
 Don't forget to *flutter pub get*.
