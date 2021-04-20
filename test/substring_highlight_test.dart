@@ -48,7 +48,7 @@ void main() {
     );
     await expectLater(
       find.byType(MediaQuery),
-      matchesGoldenFile('text-size.png'),
+      matchesGoldenFile('goldens/text-size.png'),
     );
   });
 }
