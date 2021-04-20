@@ -1,6 +1,12 @@
 # Changelog
 
 
+## Version 1.0.25 (2021-04-20)
+
+- Support for overflow and maxLines properties [issue #5]
+- Support for RichText scale factor [issue #8]
+
+
 ## Version 1.0.24 (2021-04-20)
 
 - upgraded to Dart 2.0

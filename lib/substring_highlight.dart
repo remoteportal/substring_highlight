@@ -4,6 +4,19 @@ import 'package:flutter/material.dart';
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
+  SubstringHighlight({
+    required this.text,
+    required this.term,
+    this.maxLines,
+    this.overflow = TextOverflow.clip,
+    this.textStyle = const TextStyle(
+      color: Colors.black,
+    ),
+    this.textStyleHighlight = const TextStyle(
+      color: Colors.red,
+    ),
+  });
+
   /// The String searched by {SubstringHighlight.term}.
   final String text;
 
@@ -16,21 +29,22 @@ class SubstringHighlight extends StatelessWidget {
   /// The {TextStyle} of the {SubstringHighlight.term}s found.
   final TextStyle textStyleHighlight;
 
-  SubstringHighlight({
-    required this.text,
-    required this.term,
-    this.textStyle = const TextStyle(
-      color: Colors.black,
-    ),
-    this.textStyleHighlight = const TextStyle(
-      color: Colors.red,
-    ),
-  });
+  /// How visual overflow should be handled.
+  final TextOverflow overflow;
+
+  /// An optional maximum number of lines for the text to span, wrapping if necessary.
+  /// If the text exceeds the given number of lines, it will be truncated according
+  /// to [overflow].
+  ///
+  /// If this is 1, text will not wrap. Otherwise, text will be wrapped at the
+  /// edge of the box.
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     if (term.isEmpty) {
-      return Text(text, style: textStyle);
+      return Text(text,
+          maxLines: maxLines, overflow: overflow, style: textStyle);
     } else {
       String termLC = term.toLowerCase();
 
@@ -50,7 +64,12 @@ class SubstringHighlight extends StatelessWidget {
           i += term.length;
         }
       }
-      return RichText(text: TextSpan(children: children));
+
+      return RichText(
+          maxLines: maxLines,
+          overflow: overflow,
+          text: TextSpan(children: children, style: textStyle),
+          textScaleFactor: MediaQuery.of(context).textScaleFactor);
     }
   }
 }

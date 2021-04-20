@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
           body: Center(
               child: SubstringHighlight(
-                  text: 'this highlights all the th\'s', term: 'th'))),
+                  text: 'this highlights all the th\'s',
+                  textStyle: TextStyle(
+                    // non-highlight style
+                    color: Colors.grey,
+                  ),
+                  term: 'th'))),
     );
   }
 }

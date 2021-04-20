@@ -33,7 +33,7 @@ Add a new dependency line to your project/pubspec.yaml file:
 ```yaml
 dependencies:
   ...
-  substring_highlight: ^1.0.24      # use latest version
+  substring_highlight: ^1.0.25      # use latest version
 ```
 
 Don't forget to *flutter pub get*.
