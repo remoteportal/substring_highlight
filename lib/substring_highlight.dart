@@ -2,7 +2,7 @@ library substring_highlight;
 
 import 'package:flutter/material.dart';
 
-const int int64MaxValue = 9223372036854775807; //HACK
+final int int64MaxValue = double.maxFinite.toInt(); //HACK
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
