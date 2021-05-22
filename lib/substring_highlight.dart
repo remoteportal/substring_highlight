@@ -83,7 +83,7 @@ class SubstringHighlight extends StatelessWidget {
     int start = 0;
     int idx = 0; // walks text (string that is searched)
     while (idx < textLC.length) {
-      print('=== idx=$idx');
+      // print('=== idx=$idx');
       nonHighlightAdd(int end) => children
           .add(TextSpan(text: text.substring(start, end), style: textStyle));
 
@@ -91,18 +91,18 @@ class SubstringHighlight extends StatelessWidget {
       int iNearest = -1;
       int idxNearest = __int64MaxValue;
       for (int i = 0; i < termListLC.length; i++) {
-        print('*** i=$i');
+        // print('*** i=$i');
         int at;
         if ((at = textLC.indexOf(termListLC[i], idx)) >= 0) //MAGIC//CORE
         {
-          print('idx=$idx i=$i at=$at => FOUND: ${termListLC[i]}');
+          // print('idx=$idx i=$i at=$at => FOUND: ${termListLC[i]}');
 
           if (words) {
             if (at > 0 &&
                 !wordDelimiters.contains(
                     textLC[at - 1])) // is preceding character a delimiter?
             {
-              print('disqualify preceding: idx=$idx i=$i');
+              // print('disqualify preceding: idx=$idx i=$i');
               continue; // preceding character isn't delimiter so disqualify
             }
 
@@ -111,14 +111,14 @@ class SubstringHighlight extends StatelessWidget {
                 !wordDelimiters.contains(textLC[
                     followingIdx])) // is character following the search term a delimiter?
             {
-              print('disqualify following: idx=$idx i=$i');
+              // print('disqualify following: idx=$idx i=$i');
               continue; // following character isn't delimiter so disqualify
             }
           }
 
           // print('term #$i found at=$at (${termListLC[i]})');
           if (at < idxNearest) {
-            print('PEG');
+            // print('PEG');
             iNearest = i;
             idxNearest = at;
           }

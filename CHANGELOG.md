@@ -2,6 +2,12 @@
 
 
 
+## Version 1.0.33 (2021-05-22)
+
+- turned off print statements that I left on by mistake.
+
+
+
 ## Version 1.0.32 (2021-05-22)
 
 - added 'words' flag to only match complete words (not substrings/characters inside of words); default: words=false.  This feature (words=true) is experimental and Alpha!
