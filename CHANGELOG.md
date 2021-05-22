@@ -1,19 +1,26 @@
 # Changelog
 
 
+## Version 1.0.27 (2021-05-22)
+
+- fixed building for web; now use double.maxFinite.toInt() instead of hardcoded constant for maximum integer [issues #13 and #14]
+- added textAlign property [issue #12]
+- satisfied pull request
+
+
 
 ## Version 1.0.26 (2021-04-20)
 
-- Support for multiple search terms with terms property [issues #2 and #6 and #7]
-- Support for overflow and maxLines properties [issue #5]
+- support for multiple search terms [issues #2 and #6 and #7]
+- support for case-sensitive matches
 - satisfied all pull requests
 
 
 
 ## Version 1.0.25 (2021-04-20)
 
-- Support for overflow and maxLines properties [issue #5]
-- Support for RichText scale factor [issue #8]
+- support for overflow and maxLines properties [issue #5]
+- support for RichText scale factor [issue #8]
 
 
 ## Version 1.0.24 (2021-04-20)
@@ -25,7 +32,7 @@
 
 ## Version 0.1.3 (2020-02-18)
 
-- Effective Dart
+- effective Dart
 
 
 

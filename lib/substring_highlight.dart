@@ -2,17 +2,18 @@ library substring_highlight;
 
 import 'package:flutter/material.dart';
 
-const int int64MaxValue = 9223372036854775807; //HACK
+final int __int64MaxValue = double.maxFinite.toInt();
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
   SubstringHighlight({
-    required this.text,
-    this.term,
-    this.terms,
     this.caseSensitive = false,
     this.maxLines,
     this.overflow = TextOverflow.clip,
+    this.term,
+    this.terms,
+    required this.text,
+    this.textAlign = TextAlign.left,
     this.textStyle = const TextStyle(
       color: Colors.black,
     ),
@@ -21,23 +22,8 @@ class SubstringHighlight extends StatelessWidget {
     ),
   }) : assert(term != null || terms != null);
 
-  /// The String searched by {SubstringHighlight.term} and/or {SubstringHighlight.terms} array.
-  final String text;
-
-  /// The sub-string that is highlighted inside {SubstringHighlight.text}.  (Either term or terms must be passed.  If both are passed they are combined.)
-  final String? term;
-
-  /// The array of sub-strings that are highlighted inside {SubstringHighlight.text}.  (Either term or terms must be passed.  If both are passed they are combined.)
-  final List<String>? terms;
-
   /// By default the search terms are case insensitive.  Pass false to force case sensitive matches.
   final bool caseSensitive;
-
-  /// The {TextStyle} of the {SubstringHighlight.text} that isn't highlighted.
-  final TextStyle textStyle;
-
-  /// The {TextStyle} of the {SubstringHighlight.term}/{SubstringHighlight.ters} matched.
-  final TextStyle textStyleHighlight;
 
   /// How visual overflow should be handled.
   final TextOverflow overflow;
@@ -49,6 +35,24 @@ class SubstringHighlight extends StatelessWidget {
   /// If this is 1, text will not wrap. Otherwise, text will be wrapped at the
   /// edge of the box.
   final int? maxLines;
+
+  /// The sub-string that is highlighted inside {SubstringHighlight.text}.  (Either term or terms must be passed.  If both are passed they are combined.)
+  final String? term;
+
+  /// The array of sub-strings that are highlighted inside {SubstringHighlight.text}.  (Either term or terms must be passed.  If both are passed they are combined.)
+  final List<String>? terms;
+
+  /// The String searched by {SubstringHighlight.term} and/or {SubstringHighlight.terms} array.
+  final String text;
+
+  /// How the text should be aligned horizontally.
+  final TextAlign textAlign;
+
+  /// The {TextStyle} of the {SubstringHighlight.text} that isn't highlighted.
+  final TextStyle textStyle;
+
+  /// The {TextStyle} of the {SubstringHighlight.term}/{SubstringHighlight.ters} matched.
+  final TextStyle textStyleHighlight;
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +72,12 @@ class SubstringHighlight extends StatelessWidget {
     int start = 0;
     int idx = 0;
     while (idx < textLC.length) {
-      addNonHighlight(int end) => children
+      nonHighlightAdd(int end) => children
           .add(TextSpan(text: text.substring(start, end), style: textStyle));
 
       // find index of term that's closest to current idx position
       int iNearest = -1;
-      int idxNearest = int64MaxValue;
+      int idxNearest = __int64MaxValue;
       for (int i = 0; i < termListLC.length; i++) {
         // print('idx=$idx i=$i $termsLC');
         int at;
@@ -93,7 +97,7 @@ class SubstringHighlight extends StatelessWidget {
         // print('iNearest=$iNearest @ $idxNearest');
         if (start < idxNearest) {
           // we found a match BUT FIRST output non-highlighted text that comes BEFORE this match
-          addNonHighlight(idxNearest);
+          nonHighlightAdd(idxNearest);
           start = idxNearest;
         }
 
@@ -108,7 +112,7 @@ class SubstringHighlight extends StatelessWidget {
         // --or--
         // one or more matches but during this iteration there are NO MORE matches
         // in either case, add reminder of text as non-highlighted text
-        addNonHighlight(textLC.length);
+        nonHighlightAdd(textLC.length);
         break;
       }
     }
@@ -117,6 +121,7 @@ class SubstringHighlight extends StatelessWidget {
         maxLines: maxLines,
         overflow: overflow,
         text: TextSpan(children: children, style: textStyle),
+        textAlign: textAlign,
         textScaleFactor: MediaQuery.of(context).textScaleFactor);
   }
 }
