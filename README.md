@@ -8,8 +8,7 @@ Inspired by the existing Flutter package "highlight_text" which supports word ma
 
 Limitations:
 1. Highlighted text is not clickable
-2. Needs a flag to promote granularity to word-level instead of character-level.
-3. Doesn't solve perplexing world problems
+2. Doesn't solve perplexing world problems like hunger and climate change
 
 The substrings being searched for highlighting _don't_ have to match at the *beginning* of the longer strings (can be anywhere inside).
 
@@ -24,7 +23,7 @@ Directionality(
 
 
 # Pull Requests
-Pull requests are welcome!
+Pull requests are welcome and I try to merge them within a few days.
 
 
 

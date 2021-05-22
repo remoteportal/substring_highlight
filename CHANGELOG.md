@@ -1,6 +1,13 @@
 # Changelog
 
 
+
+## Version 1.0.32 (2021-05-22)
+
+- added 'words' flag to only match complete words (not substrings/characters inside of words); default: words=false.  This feature (words=true) is experimental and Alpha!
+
+
+
 ## Version 1.0.27 (2021-05-22)
 
 - fixed building for web; now use double.maxFinite.toInt() instead of hardcoded constant for maximum integer [issues #13 and #14]
