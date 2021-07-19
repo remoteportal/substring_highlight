@@ -13,7 +13,7 @@ class SubstringHighlight extends StatelessWidget {
       this.term,
       this.terms,
       required this.text,
-      this.textAlign = TextAlign.left,
+      this.textAlign,
       this.textStyle = const TextStyle(
         color: Colors.black,
       ),
@@ -51,7 +51,7 @@ class SubstringHighlight extends StatelessWidget {
   final String text;
 
   /// How the text should be aligned horizontally.
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
   /// The {TextStyle} of the {SubstringHighlight.text} that isn't highlighted.
   final TextStyle textStyle;
@@ -162,7 +162,7 @@ class SubstringHighlight extends StatelessWidget {
         maxLines: maxLines,
         overflow: overflow,
         text: TextSpan(children: children, style: textStyle),
-        textAlign: textAlign,
+        textAlign: textAlign ?? DefaultTextStyle.of(context).textAlign ?? TextAlign.start,
         textScaleFactor: MediaQuery.of(context).textScaleFactor);
   }
 }
