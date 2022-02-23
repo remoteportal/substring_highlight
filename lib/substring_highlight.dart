@@ -22,8 +22,8 @@ class SubstringHighlight extends StatelessWidget {
       ),
       this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
       this.words =
-          false // default is to match substrings (hence the package name!)
-
+          false, // default is to match substrings (hence the package name!)
+      this.selectable = false
       })
       : assert(term != null || terms != null);
 
@@ -64,6 +64,9 @@ class SubstringHighlight extends StatelessWidget {
 
   /// If true then match complete words only (instead of characters or substrings within words).  This feature is in ALPHA... use 'words' AT YOUR OWN RISK!!!
   final bool words;
+  
+  /// If true then text is selectable
+  final bool selectable;
 
   @override
   Widget build(BuildContext context) {
@@ -158,11 +161,17 @@ class SubstringHighlight extends StatelessWidget {
       }
     }
 
-    return RichText(
-        maxLines: maxLines,
-        overflow: overflow,
-        text: TextSpan(children: children, style: textStyle),
-        textAlign: textAlign,
-        textScaleFactor: MediaQuery.of(context).textScaleFactor);
+    return selectable
+        ? SelectableText.rich(TextSpan(children: children, style: textStyle),
+            maxLines: maxLines,
+            // overflow: overflow,
+            textAlign: textAlign,
+            textScaleFactor: MediaQuery.of(context).textScaleFactor)
+        : RichText(
+            maxLines: maxLines,
+            overflow: overflow,
+            text: TextSpan(children: children, style: textStyle),
+            textAlign: textAlign,
+            textScaleFactor: MediaQuery.of(context).textScaleFactor);
   }
 }
