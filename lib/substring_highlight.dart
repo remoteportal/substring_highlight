@@ -10,6 +10,7 @@ class SubstringHighlight extends StatelessWidget {
       {this.caseSensitive = false,
       this.maxLines,
       this.overflow = TextOverflow.clip,
+      this.softWrap = true,
       this.term,
       this.terms,
       required this.text,
@@ -32,6 +33,11 @@ class SubstringHighlight extends StatelessWidget {
 
   /// How visual overflow should be handled.
   final TextOverflow overflow;
+
+  /// Whether the text should break at soft line breaks.
+  ///
+  /// If false, the glyphs in the text will be positioned as if there was unlimited horizontal space.
+  final bool softWrap;
 
   /// An optional maximum number of lines for the text to span, wrapping if necessary.
   /// If the text exceeds the given number of lines, it will be truncated according
@@ -161,6 +167,7 @@ class SubstringHighlight extends StatelessWidget {
     return RichText(
         maxLines: maxLines,
         overflow: overflow,
+        softWrap: softWrap,
         text: TextSpan(children: children, style: textStyle),
         textAlign: textAlign,
         textScaleFactor: MediaQuery.of(context).textScaleFactor);
