@@ -1,5 +1,6 @@
 library substring_highlight;
 
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 final int __int64MaxValue = double.maxFinite.toInt();
@@ -8,6 +9,7 @@ final int __int64MaxValue = double.maxFinite.toInt();
 class SubstringHighlight extends StatelessWidget {
   SubstringHighlight(
       {this.caseSensitive = false,
+      this.ignoreDiacritics = false,
       this.maxLines,
       this.overflow = TextOverflow.clip,
       this.term,
@@ -26,6 +28,11 @@ class SubstringHighlight extends StatelessWidget {
 
       })
       : assert(term != null || terms != null);
+
+  /// By default, diacritics are not ignored, which means "e" will not match "é".
+  /// If this parameter is set to true, diacritics will be converted to their non-diacritic
+  /// form to determine matches
+  final bool ignoreDiacritics;
 
   /// By default the search terms are case insensitive.  Pass false to force case sensitive matches.
   final bool caseSensitive;
@@ -67,7 +74,9 @@ class SubstringHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String textLC = caseSensitive ? text : text.toLowerCase();
+    final String textDiacritics =
+        ignoreDiacritics ? removeDiacritics(text) : text;
+    final String textLC = caseSensitive ? text : textDiacritics.toLowerCase();
 
     // corner case: if both term and terms array are passed then combine
     final List<String> termList = [term ?? '', ...(terms ?? [])];
@@ -75,6 +84,7 @@ class SubstringHighlight extends StatelessWidget {
     // remove empty search terms ('') because they cause infinite loops
     final List<String> termListLC = termList
         .where((s) => s.isNotEmpty)
+        .map((s) => ignoreDiacritics ? removeDiacritics(s) : s)
         .map((s) => caseSensitive ? s : s.toLowerCase())
         .toList();
 
