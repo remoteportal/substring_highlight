@@ -22,7 +22,8 @@ class SubstringHighlight extends StatelessWidget {
       ),
       this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
       this.words =
-          false // default is to match substrings (hence the package name!)
+          false, // default is to match substrings (hence the package name!)
+      this.widgetSpans
 
       })
       : assert(term != null || terms != null);
@@ -64,6 +65,9 @@ class SubstringHighlight extends StatelessWidget {
 
   /// If true then match complete words only (instead of characters or substrings within words).  This feature is in ALPHA... use 'words' AT YOUR OWN RISK!!!
   final bool words;
+
+  /// WidgetSpans at the end of text
+  final List<WidgetSpan>? widgetSpans;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +160,10 @@ class SubstringHighlight extends StatelessWidget {
           break;
         }
       }
+    }
+
+    if (widgetSpans != null && widgetSpans!.length > 0) {
+      children.addAll(widgetSpans!);
     }
 
     return RichText(
