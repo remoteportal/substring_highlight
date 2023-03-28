@@ -1,5 +1,6 @@
 library substring_highlight;
 
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 final int __int64MaxValue = double.maxFinite.toInt();
@@ -67,7 +68,9 @@ class SubstringHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String textLC = caseSensitive ? text : text.toLowerCase();
+    final String textLC = caseSensitive
+        ? removeDiacritics(text)
+        : removeDiacritics(text.toLowerCase());
 
     // corner case: if both term and terms array are passed then combine
     final List<String> termList = [term ?? '', ...(terms ?? [])];
@@ -75,7 +78,9 @@ class SubstringHighlight extends StatelessWidget {
     // remove empty search terms ('') because they cause infinite loops
     final List<String> termListLC = termList
         .where((s) => s.isNotEmpty)
-        .map((s) => caseSensitive ? s : s.toLowerCase())
+        .map((s) => caseSensitive
+            ? removeDiacritics(s)
+            : removeDiacritics(s.toLowerCase()))
         .toList();
 
     List<InlineSpan> children = [];
