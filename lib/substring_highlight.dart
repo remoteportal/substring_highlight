@@ -7,29 +7,33 @@ final int __int64MaxValue = double.maxFinite.toInt();
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
-  SubstringHighlight(
-      {this.caseSensitive = false,
-      this.maxLines,
-      this.overflow = TextOverflow.clip,
-      this.term,
-      this.terms,
-      required this.text,
-      this.textAlign = TextAlign.left,
-      this.textStyle = const TextStyle(
-        color: Colors.black,
-      ),
-      this.textStyleHighlight = const TextStyle(
-        color: Colors.red,
-      ),
-      this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
-      this.words =
-          false // default is to match substrings (hence the package name!)
-
-      })
-      : assert(term != null || terms != null);
+  SubstringHighlight({
+    this.caseSensitive = false,
+    this.ignoreDiacritics = true,
+    this.maxLines,
+    this.overflow = TextOverflow.clip,
+    this.term,
+    this.terms,
+    required this.text,
+    this.textAlign = TextAlign.left,
+    this.textStyle = const TextStyle(
+      color: Colors.black,
+    ),
+    this.textStyleHighlight = const TextStyle(
+      color: Colors.red,
+    ),
+    this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
+    this.words =
+        false, // default is to match substrings (hence the package name!)
+  }) : assert(term != null || terms != null);
 
   /// By default the search terms are case insensitive.  Pass false to force case sensitive matches.
   final bool caseSensitive;
+
+  /// By default, diacritics are not ignored, which means "anh" will not match "ảnh, ánh".
+  /// If this parameter is set to true, diacritics will be converted to their non-diacritic
+  /// form to determine matches
+  final bool ignoreDiacritics;
 
   /// How visual overflow should be handled.
   final TextOverflow overflow;
@@ -68,9 +72,11 @@ class SubstringHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String textLC = caseSensitive
-        ? removeDiacritics(text)
-        : removeDiacritics(text.toLowerCase());
+    final String textDiacritics =
+        ignoreDiacritics ? removeDiacritics(text) : text;
+
+    final String textLC =
+        caseSensitive ? textDiacritics : textDiacritics.toLowerCase();
 
     // corner case: if both term and terms array are passed then combine
     final List<String> termList = [term ?? '', ...(terms ?? [])];
@@ -78,9 +84,8 @@ class SubstringHighlight extends StatelessWidget {
     // remove empty search terms ('') because they cause infinite loops
     final List<String> termListLC = termList
         .where((s) => s.isNotEmpty)
-        .map((s) => caseSensitive
-            ? removeDiacritics(s)
-            : removeDiacritics(s.toLowerCase()))
+        .map((s) => ignoreDiacritics ? removeDiacritics(s) : s)
+        .map((s) => caseSensitive ? s : s.toLowerCase())
         .toList();
 
     List<InlineSpan> children = [];
