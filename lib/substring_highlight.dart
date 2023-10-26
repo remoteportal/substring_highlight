@@ -72,11 +72,8 @@ class SubstringHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String textDiacritics =
-        ignoreDiacritics ? removeDiacritics(text) : text;
-
     final String textLC =
-        caseSensitive ? textDiacritics : textDiacritics.toLowerCase();
+        caseSensitive ? text : text.toLowerCase();
 
     // corner case: if both term and terms array are passed then combine
     final List<String> termList = [term ?? '', ...(terms ?? [])];
