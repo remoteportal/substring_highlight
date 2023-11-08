@@ -1,31 +1,31 @@
 library substring_highlight;
 
+import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 
 final int __int64MaxValue = double.maxFinite.toInt();
 
 /// Widget that renders a string with sub-string highlighting.
 class SubstringHighlight extends StatelessWidget {
-  SubstringHighlight(
-      {this.caseSensitive = false,
-      this.maxLines,
-      this.overflow = TextOverflow.clip,
-      this.term,
-      this.terms,
-      required this.text,
-      this.textAlign = TextAlign.left,
-      this.textStyle = const TextStyle(
-        color: Colors.black,
-      ),
-      this.textStyleHighlight = const TextStyle(
-        color: Colors.red,
-      ),
-      this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
-      this.words =
-          false // default is to match substrings (hence the package name!)
-
-      })
-      : assert(term != null || terms != null);
+  SubstringHighlight({
+    this.caseSensitive = false,
+    this.maxLines,
+    this.overflow = TextOverflow.clip,
+    this.term,
+    this.terms,
+    required this.text,
+    this.textAlign = TextAlign.left,
+    this.textStyle = const TextStyle(
+      color: Colors.black,
+    ),
+    this.textStyleHighlight = const TextStyle(
+      color: Colors.red,
+    ),
+    this.wordDelimiters = ' .,;?!<>[]~`@#\$%^&*()+-=|\/_',
+    this.words =
+        false, // default is to match substrings (hence the package name!)
+    this.ignoreDiacritics = false,
+  }) : assert(term != null || terms != null);
 
   /// By default the search terms are case insensitive.  Pass false to force case sensitive matches.
   final bool caseSensitive;
@@ -65,9 +65,14 @@ class SubstringHighlight extends StatelessWidget {
   /// If true then match complete words only (instead of characters or substrings within words).  This feature is in ALPHA... use 'words' AT YOUR OWN RISK!!!
   final bool words;
 
+  /// `false` by default. If set true then texts that contains diacritics, for example: 'é', 'è' or 'ê', will match the terms.
+  final bool ignoreDiacritics;
+
   @override
   Widget build(BuildContext context) {
-    final String textLC = caseSensitive ? text : text.toLowerCase();
+    final textNormalized = ignoreDiacritics ? removeDiacritics(text) : text;
+    final String textLC =
+        caseSensitive ? textNormalized : textNormalized.toLowerCase();
 
     // corner case: if both term and terms array are passed then combine
     final List<String> termList = [term ?? '', ...(terms ?? [])];
@@ -76,6 +81,7 @@ class SubstringHighlight extends StatelessWidget {
     final List<String> termListLC = termList
         .where((s) => s.isNotEmpty)
         .map((s) => caseSensitive ? s : s.toLowerCase())
+        .map((s) => ignoreDiacritics ? removeDiacritics(s) : s)
         .toList();
 
     List<InlineSpan> children = [];
